@@ -13,7 +13,7 @@ const MockRepository = () => {
     }
 }
 
-describe("unit Test find customer use case", () => {
+describe("unit Test find product use case", () => {
     it("should list all products", async () => {
         const repo = MockRepository()
         const usecase = new ListProductUsecase(repo)

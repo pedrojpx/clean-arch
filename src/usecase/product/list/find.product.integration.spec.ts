@@ -4,7 +4,7 @@ import ProductRepository from "../../../infrastructure/product/repository/sequel
 import Product from "../../../domain/product/entity/product"
 import ListProductUsecase from "./find.product.usecase"
 
-describe("Integration Test find customer use case", () => {
+describe("Integration Test find product use case", () => {
 
     let sequilize: Sequelize
 
@@ -24,7 +24,7 @@ describe("Integration Test find customer use case", () => {
         await sequilize.close()
     })
 
-    it("should find a customer", async () => {
+    it("should find a product", async () => {
         const repo = new ProductRepository()
         const prod = new Product("123", "product", 123)
         const prod2 = new Product("1232", "product2", 1232)

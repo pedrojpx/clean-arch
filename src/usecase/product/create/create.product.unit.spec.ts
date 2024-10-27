@@ -1,4 +1,3 @@
-import { INTERRUPT } from "sqlite3"
 import CreateProductUsecase from "./create.product.usecase"
 
 const input = {
@@ -38,6 +37,15 @@ describe("unit test create product use case", () => {
         input.name = ""
     
         await expect(usecase.execute(input)).rejects.toThrow("name is required")
+    })
+   
+    it("should not create a product if type is unsupported", async() => {
+        const repo = MockRepository()
+        const usecase = new CreateProductUsecase(repo)
+        input.name = "name"
+        input.type = "zzz"
+    
+        await expect(usecase.execute(input)).rejects.toThrow("Unsupported product type")
     })
     
 })

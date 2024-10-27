@@ -1,5 +1,4 @@
 import Product from "../../../domain/product/entity/product";
-import FindCustomerUseCase from "../../customer/find/find.customer.usecase";
 import FindProductUsecase from "./find.product.usecase";
 
 const prod = new Product("123", "product", 123)
@@ -13,7 +12,7 @@ const MockRepository = () => {
     }
 }
 
-describe("unit Test find customer use case", () => {
+describe("unit Test find product use case", () => {
     it("should find a product", async () => {
         const repo = MockRepository()
         const usecase = new FindProductUsecase(repo)
