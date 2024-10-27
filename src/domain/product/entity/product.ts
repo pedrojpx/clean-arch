@@ -38,15 +38,15 @@ export default class Product implements ProductInterface{
 
     validate() {
         if (this._id.length === 0) {
-            throw("Id is required")
+            throw new Error( "Id is required")
         }
 
         if (this._name.length === 0) {
-            throw("name is required")
+            throw new Error("name is required")
         }
 
         if (this._price <= 0) {
-            throw("invalid price value")
+            throw new Error("invalid price value")
         }
     }
 }
