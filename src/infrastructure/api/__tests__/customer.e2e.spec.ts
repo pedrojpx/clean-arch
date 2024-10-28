@@ -83,6 +83,20 @@ describe("E2E test for customer", () => {
         expect(c2.address.city).toBe("city")
         expect(c2.address.number).toBe(123)
         expect(c2.address.zip).toBe("zip")
+
+        const xmlList = await request(app)
+        .get("/customer")
+        .set("Accept", "application/xml")
+        .send()
+
+        expect(xmlList.status).toBe(200)
+        expect(xmlList.text).toContain(`<?xml version="1.0" encoding="UTF-8"?>`)
+        expect(xmlList.text).toContain(`<customers>`)
+        expect(xmlList.text).toContain(`<customer>`)
+        expect(xmlList.text).toContain(`<name>pedro</name>`)
+        expect(xmlList.text).toContain(`<address>`)
+        //etc, etc... aqui poderia vir vários outros expect checando mais pedaços do texto para garantir que o xml está correto
+
     })
 
 })
