@@ -8,7 +8,7 @@ describe("Product unit tests", () => {
 
             const product = new Product("", "Product 1", 100)
 
-        }).toThrow("Id is required")
+        }).toThrow("product: id is required")
     })
 
     it("should throw error when name is empty", () => {
@@ -16,7 +16,7 @@ describe("Product unit tests", () => {
 
             const product = new Product("123", "", 100)
 
-        }).toThrow("name is required")
+        }).toThrow("product: name is required")
     })
 
     it("should throw error when price value is invalid", () => {
@@ -24,7 +24,15 @@ describe("Product unit tests", () => {
 
             const product = new Product("123", "Product 1", -1)
 
-        }).toThrow("invalid price value")
+        }).toThrow("product: invalid price value")
+    })
+    
+    it("should throw error when id and name are missing and price value is invalid", () => {
+        expect(() => {
+
+            const product = new Product("", "", -1)
+
+        }).toThrow("product: id is required,product: name is required,product: invalid price value")
     })
 
     it("should change name", () => {

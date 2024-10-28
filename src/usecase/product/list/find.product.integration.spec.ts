@@ -34,8 +34,8 @@ describe("Integration Test find product use case", () => {
         const usecase = new ListProductUsecase(repo)
         const output = await usecase.execute({})
 
-        expect(prod).toEqual({_id: output.products[0].id, _name: output.products[0].name, _price: output.products[0].price})
-        expect(prod2).toEqual({_id: output.products[1].id, _name: output.products[1].name, _price: output.products[1].price})
+        expect(prod).toEqual({_id: output.products[0].id, _name: output.products[0].name, _price: output.products[0].price, notification: {errors: []}})
+        expect(prod2).toEqual({_id: output.products[1].id, _name: output.products[1].name, _price: output.products[1].price, notification: {errors: []}})
 
     })
 })
