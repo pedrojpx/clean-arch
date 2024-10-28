@@ -44,7 +44,7 @@ describe("unit test create customer use case", () => {
         const usecase = new CreateCustomerUseCase(repo)
         input.name = ""
 
-        await expect(usecase.execute(input)).rejects.toThrow("Name is required")
+        await expect(usecase.execute(input)).rejects.toThrow("customer: name is required")
         
     })
     

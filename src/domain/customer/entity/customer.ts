@@ -1,16 +1,21 @@
+import Entity from "../../@shared/entity/entity.abstract";
+import NotificationError from "../../@shared/notification/notification.error";
 import Address from "../value-object/address";
 
-export default class Customer {
-    private _id: string;
+export default class Customer extends Entity {
     private _name: string;
     private _address!: Address;
     private _active: boolean = false;
     private _rewardPoints: number = 0;
 
     constructor(id: string, name: string) {
+        super()
         this._id = id;
         this._name = name;
         this.validate();
+        if (this.notification.hasErrors()) {
+            throw new NotificationError(this.notification.getErrors())
+        }
     }
 
     get name(): string {
@@ -19,10 +24,6 @@ export default class Customer {
 
     get rewardPoints(): number {
         return this._rewardPoints
-    }
-
-    get id(): string {
-        return this._id
     }
 
     get address(): Address {
@@ -40,7 +41,8 @@ export default class Customer {
     
     changeAddress(address: Address) {
         if (address === undefined) {
-            throw new Error("address is required to change address")
+            this.notification.addError({context: "customer", message: "address is required to change address"})
+            throw new NotificationError(this.notification.getErrors());
         }
         this._address = address;
         this.validate();
@@ -48,7 +50,8 @@ export default class Customer {
 
     activate() {
         if (this._address === undefined) {
-            throw new Error("Address is mandatory to activate a customer");
+            this.notification.addError({context: "customer", message: "address is mandatory to activate a customer"})
+            throw new NotificationError(this.notification.getErrors());
         }
         this._active = true;
     }
@@ -59,15 +62,15 @@ export default class Customer {
 
     validate() {
         if (this._name.length === 0) {
-            throw new Error("Name is required")
+            this.notification.addError({context: "customer", message: "name is required"})
         }
-
-        if (this._id.length === 0) {
-            throw new Error("Id is required")
+        
+        if (this.id.length === 0) {
+            this.notification.addError({context: "customer", message: "id is required"})
         }
-
+        
         if (this.rewardPoints < 0) {
-            throw new Error("invalid reward points value")
+            this.notification.addError({context: "customer", message: "invalid reward points value"})
         }
     }
 

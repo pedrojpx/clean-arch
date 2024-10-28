@@ -7,7 +7,7 @@ describe("Customer unit tests", () => {
 
         expect(() => {
             let customer = new Customer("", "John")  
-        }).toThrow("Id is required")
+        }).toThrow("customer: id is required")
     
     })
 
@@ -15,7 +15,7 @@ describe("Customer unit tests", () => {
 
         expect(() => {
             let customer = new Customer("123", "")  
-        }).toThrow("Name is required")
+        }).toThrow("customer: name is required")
     
     })
 
@@ -65,7 +65,7 @@ describe("Customer unit tests", () => {
         expect(() => {
             const customer = new Customer("123", "John")
             customer.activate()
-        }).toThrow("Address is mandatory to activate a customer")
+        }).toThrow("customer: address is mandatory to activate a customer")
     
     })
 
