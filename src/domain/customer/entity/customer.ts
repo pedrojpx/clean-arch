@@ -1,5 +1,6 @@
 import Entity from "../../@shared/entity/entity.abstract";
 import NotificationError from "../../@shared/notification/notification.error";
+import CustomerValidatorFactory from "../factory/customer.validator.factory";
 import Address from "../value-object/address";
 
 export default class Customer extends Entity {
@@ -61,17 +62,7 @@ export default class Customer extends Entity {
     }
 
     validate() {
-        if (this._name.length === 0) {
-            this.notification.addError({context: "customer", message: "name is required"})
-        }
-        
-        if (this.id.length === 0) {
-            this.notification.addError({context: "customer", message: "id is required"})
-        }
-        
-        if (this.rewardPoints < 0) {
-            this.notification.addError({context: "customer", message: "invalid reward points value"})
-        }
+        CustomerValidatorFactory.create().validate(this)
     }
 
     //the only way to change an address is to substitute the entire value object
